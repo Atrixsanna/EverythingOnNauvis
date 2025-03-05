@@ -3,6 +3,11 @@ local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-de
 
 -- Remove planets
 
+-- data.raw.planet["nauvis"].map_gen_settings = nil
+-- if data.raw.planet["nauvis"] then
+--   data.raw.planet["nauvis"].hidden = true
+-- end
+
 data.raw.planet["aquilo"].map_gen_settings = nil
 if data.raw.planet["aquilo"] then
   data.raw.planet["aquilo"].hidden = true
@@ -31,7 +36,7 @@ data_util.delete_prototype("space-connection", "vulcanus-gleba")
 data_util.delete_prototype("space-connection", "gleba-fulgora")
 data_util.delete_prototype("space-connection", "gleba-aquilo")
 data_util.delete_prototype("space-connection", "fulgora-aquilo")
-data.raw["space-connection"]["aquilo-solar-system-edge"].from = "nauvis"
+data.raw["space-connection"]["aquilo-solar-system-edge"].from = "nauvis2"
 -- data_util.delete_prototype("space-connection", "aquilo-solar-system-edge")
 
 -- remove space age menu simulations that break
