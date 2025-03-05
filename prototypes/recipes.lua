@@ -1,9 +1,27 @@
-
--- Remove surface conditions for every recipe
-for _, category in pairs(data.raw) do
-    for name, data in pairs(category) do
-        if data.surface_conditions then
-            data.surface_conditions = nil
-        end
-    end
-end
+data.raw.recipe['acid-neutralisation'].surface_conditions = nil
+data.raw.recipe['agricultural-science-pack'].surface_conditions = nil
+data.raw.recipe['artificial-jellynut-soil'].surface_conditions = nil
+data.raw.recipe['artificial-yumako-soil'].surface_conditions = nil
+data.raw.recipe['big-mining-drill'].surface_conditions = nil
+data.raw.recipe['biochamber'].surface_conditions = nil
+data.raw.recipe['copper-bacteria-cultivation'].surface_conditions = nil
+data.raw.recipe['copper-bacteria'].surface_conditions = nil
+data.raw.recipe['cryogenic-plant'].surface_conditions = nil
+data.raw.recipe['cryogenic-science-pack'].surface_conditions = nil
+data.raw.recipe['electromagnetic-plant'].surface_conditions = nil
+data.raw.recipe['electromagnetic-science-pack'].surface_conditions = nil
+data.raw.recipe['foundry'].surface_conditions = nil
+data.raw.recipe['fusion-generator'].surface_conditions = nil
+data.raw.recipe['fusion-reactor'].surface_conditions = nil
+data.raw.recipe['iron-bacteria-cultivation'].surface_conditions = nil
+data.raw.recipe['iron-bacteria'].surface_conditions = nil
+data.raw.recipe['metallurgic-science-pack'].surface_conditions = nil
+data.raw.recipe['overgrowth-jellynut-soil'].surface_conditions = nil
+data.raw.recipe['overgrowth-yumako-soil'].surface_conditions = nil
+data.raw.recipe['pentapod-egg'].surface_conditions = nil
+data.raw.recipe['quantum-processor'].surface_conditions = nil
+data.raw.recipe['recycler'].surface_conditions = nil
+data.raw.recipe['turbo-loader'].surface_conditions = nil
+data.raw.recipe['turbo-splitter'].surface_conditions = nil
+data.raw.recipe['turbo-transport-belt'].surface_conditions = nil
+data.raw.recipe['turbo-underground-belt'].surface_conditions = nil
