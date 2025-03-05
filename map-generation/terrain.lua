@@ -317,12 +317,12 @@ data:extend({
       elevation_magnitude = 20,
       wlc_amplitude = 2,
       ammonia_level = "10 * log2(control:ammonia_ocean:size)",
-      wlc_elevation = "max(aquilo_main - ammonia_level * wlc_amplitude, starting_island, north_bias)",
+      wlc_elevation = "max(aquilo_main - ammonia_level * wlc_amplitude, starting_island, west_bias)",
       aquilo_main = "elevation_magnitude * (0.25 * aquilo_detail + 3 * aquilo_macro * starting_macro_multiplier)",
       -- if most of the world is flooded make sure starting areas still have land
       starting_island = "aquilo_main + elevation_magnitude * (2.5 - distance * segmentation_multiplier / 200)",
       starting_macro_multiplier = "clamp(distance * aquilo_segmentation_multiplier / 2000, 0, 1)",
-      north_bias = "aquilo_main + elevation_magnitude * (2 + y * segmentation_multiplier / 500)",
+      west_bias = "aquilo_main + elevation_magnitude * (2 + x * segmentation_multiplier / 500)",
     }
   },
   {
@@ -754,7 +754,7 @@ data:extend({
     -- Create mask for gleba territory
     type = "noise-expression",
     name = "gleba_mask",
-    expression = "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + south_offset > -10, 1, 0), 0))",
+    expression = "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + east_offset > -10, 1, 0), 0))",
     local_expressions = {
       grass_1 = util.generate_default_name("grass-1"),
       grass_2 = util.generate_default_name("grass-2"),
@@ -762,7 +762,7 @@ data:extend({
       grass_4 = util.generate_default_name("grass-4"),
       grass = "grass_1 + grass_2 + grass_3 + grass_4",
       starting_island = "20 * (4 - distance / 300)",
-      south_offset = "clamp((y - 500) / 30, -15, 0)"
+      east_offset = "clamp((x - 500) / 30, -15, 0)"
     }
   },
 
