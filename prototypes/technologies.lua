@@ -63,8 +63,24 @@ table.insert(data.raw.technology["promethium-science-pack"].prerequisites, "sola
 data.raw.technology["lithium-processing"].prerequisites = {"rocket-turret", "advanced-asteroid-processing", "heating-tower", "asteroid-reprocessing", "electromagnetic-science-pack"}
 
 -- Gleba
+data.raw.technology["landfill"].prerequisites = nil
+data.raw.technology["landfill"].research_trigger = {
+  type = "mine-entity",
+  entity = "stone"
+}
+data.raw.technology["steel-processing"].prerequisites = nil
+data.raw.technology["steel-processing"].research_trigger = {
+  type = "craft-item",
+  item = "iron-plate",
+  count = 5
+}
 data.raw.technology["agriculture"].prerequisites = {"landfill", "steel-processing"}
 data.raw.technology["heating-tower"].prerequisites = {"concrete"}
+data.raw.technology["carbon-fiber"].prerequisites = {"agricultural-science-pack", "chemical-science-pack"}
+data_util.remove_packs("carbon-fiber", {"space-science-pack"})
+data_util.remove_packs("toolbelt-equipment", {"space-science-pack"})
+data_util.remove_packs("stack-inserter", {"space-science-pack"})
+data_util.remove_packs("rocket-turret", {"space-science-pack"})
 
 -- Fulgora
 data.raw.technology["holmium-processing"].research_trigger = {type = "mine-entity", entity = "holmium-ore"}
@@ -85,27 +101,5 @@ data.raw.technology["recycling"].unit = {
 data_util.hide_prototype("technology", "rail-support-foundations")
 
 -- Vulcanus
-data.raw.technology["calcite-processing"].prerequisites = {"production-science-pack"}
-data.raw.technology["calcite-processing"].research_trigger = nil
-data.raw.technology["calcite-processing"].unit = {
-  count = 100,
-  ingredients = {
-    {"automation-science-pack", 1},
-    {"logistic-science-pack", 1},
-    {"chemical-science-pack", 1},
-    {"production-science-pack", 1}
-  },
-  time = 5
-}
-data.raw.technology["tungsten-carbide"].prerequisites = {"production-science-pack"}
-data.raw.technology["tungsten-carbide"].research_trigger = nil
-data.raw.technology["tungsten-carbide"].unit = {
-  count = 100,
-  ingredients = {
-    {"automation-science-pack", 1},
-    {"logistic-science-pack", 1},
-    {"chemical-science-pack", 1},
-    {"production-science-pack", 1}
-  },
-  time = 5
-}
+data.raw.technology['calcite-processing'].prerequisites = {}
+data.raw.technology['tungsten-carbide'].prerequisites = {}
