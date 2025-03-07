@@ -758,19 +758,37 @@ data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "mask_gleba_te
 
 -- New noise expressions and noise functions
 data:extend({
+  -- Create mask for gleba territory
   {
-    -- Create mask for gleba territory
     type = "noise-expression",
     name = "gleba_mask",
-    expression = "mask_off_vulcano_coverage(if(min(grass, grass - starting_island) > -10, if(grass + east_offset > -10, 1, 0), 0))",
-    local_expressions = {
-      grass_1 = util.generate_default_name("grass-1"),
-      grass_2 = util.generate_default_name("grass-2"),
-      grass_3 = util.generate_default_name("grass-3"),
-      grass_4 = util.generate_default_name("grass-4"),
-      grass = "grass_1 + grass_2 + grass_3 + grass_4",
-      starting_island = "20 * (4 - distance / 300)",
-      east_offset = "clamp((x - 500) / 30, -15, 0)"
+    -- expression = "max(vulcanus_starting_volcano_spot, raw_spots - starting_protector)",
+    expression = "raw_spots",
+    local_expressions =
+    {
+      raw_spots = "spot_noise{x = x + gleba_wobble_small_x + gleba_wobble_x/2,\z
+                              y = y + gleba_wobble_small_y + gleba_wobble_y/2,\z
+                              seed0 = map_seed,\z
+                              seed1 = 1,\z
+                              candidate_spot_count = 1,\z
+                              suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
+                              skip_span = 1,\z
+                              skip_offset = 0,\z
+                              region_size = 64*density_multiplier,\z
+                              density_expression = volcano_area / volcanism_sq,\z
+                              spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
+                              spot_radius_expression = volcano_spot_radius,\z
+                              hard_region_target_quantity = 0,\z
+                              spot_favorability_expression = volcano_area,\z
+                              basement_value = 0,\z
+                              maximum_spot_basement_radius = volcano_spot_radius}",
+
+      volcano_area = "lerp(vulcanus_mountains_biome_full_pre_volcano, 0, vulcanus_starting_area)",
+      volcano_spot_radius = "300 * volcanism * sqrt(1 + control:gleba_water:size)",
+      volcano_spot_spacing = "1500 * volcanism",
+      volcanism = "0.3 + 0.7 * slider_rescale(control:gleba_water:size, 3) / slider_rescale(control:gleba_water:frequency, 3)",
+      volcanism_sq = "volcanism * volcanism",
+      density_multiplier = "5 / sqrt(control:gleba_water:frequency)"
     }
   },
 
@@ -930,9 +948,9 @@ data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spo
                                                                                                  seed1 = 1,\z
                                                                                                  candidate_spot_count = 1,\z
                                                                                                  suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
-                                                                                                 skip_span = 1,\z
-                                                                                                 skip_offset = 0,\z
-                                                                                                 region_size = 256*density_multiplier,\z
+                                                                                                 skip_span = 2,\z
+                                                                                                 skip_offset = 1,\z
+                                                                                                 region_size = 64*density_multiplier,\z
                                                                                                  density_expression = volcano_area / volcanism_sq,\z
                                                                                                  spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
                                                                                                  spot_radius_expression = volcano_spot_radius,\z
