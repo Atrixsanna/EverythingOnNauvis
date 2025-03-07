@@ -145,6 +145,14 @@ terrain.mask_nauvis_territory("red-desert-2", "tile")
 terrain.mask_nauvis_territory("red-desert-3", "tile")
 -- terrain.mask_nauvis_territory("water", "tile")
 -- terrain.mask_nauvis_territory("deepwater", "tile")
+terrain.mask_nauvis_territory("crude-oil", "resource")
+terrain.mask_nauvis_territory("iron-ore", "resource")
+terrain.mask_nauvis_territory("copper-ore", "resource")
+terrain.mask_nauvis_territory("coal", "resource")
+terrain.mask_nauvis_territory("uranium-ore", "resource")
+terrain.mask_nauvis_territory("holmium-ore", "resource")
+terrain.mask_nauvis_territory("calcite", "resource")
+terrain.mask_off_aquilo_territory("stone", "resource")
 -- END: Mask nauvis territory on all autoplace settings
 
 -- Remove nauvis cliffs from vulcanus_terrain
