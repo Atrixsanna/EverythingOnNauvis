@@ -64,18 +64,30 @@ data.raw.technology["lithium-processing"].prerequisites = {"rocket-turret", "adv
 
 -- Gleba
 data.raw.technology["landfill"].prerequisites = nil
+data.raw.technology["landfill"].unit = nil
 data.raw.technology["landfill"].research_trigger = {
   type = "mine-entity",
   entity = "stone"
 }
 data.raw.technology["steel-processing"].prerequisites = nil
+data.raw.technology["steel-processing"].unit = nil
 data.raw.technology["steel-processing"].research_trigger = {
   type = "craft-item",
   item = "iron-plate",
   count = 5
 }
 data.raw.technology["agriculture"].prerequisites = {"landfill", "steel-processing"}
-data.raw.technology["heating-tower"].prerequisites = {"concrete"}
+data.raw.technology['heating-tower'].prerequisites = {"concrete"}
+data.raw.technology['heating-tower'].research_trigger = nil
+data.raw.technology['heating-tower'].unit = {
+  count = 500,
+  ingredients = {
+    {"automation-science-pack", 1},
+    {"logistic-science-pack", 1}
+  },
+  time = 30
+}
+
 data.raw.technology["carbon-fiber"].prerequisites = {"agricultural-science-pack", "chemical-science-pack"}
 data_util.remove_packs("carbon-fiber", {"space-science-pack"})
 data_util.remove_packs("toolbelt-equipment", {"space-science-pack"})
@@ -83,17 +95,10 @@ data_util.remove_packs("stack-inserter", {"space-science-pack"})
 data_util.remove_packs("rocket-turret", {"space-science-pack"})
 
 -- Fulgora
-data.raw.technology["recycling"].prerequisites = {"processing-unit", "production-science-pack"}
-data.raw.technology["recycling"].research_trigger = nil
-data.raw.technology["recycling"].unit = {
-  count = 100,
-  ingredients = {
-    {"automation-science-pack", 1},
-    {"logistic-science-pack", 1},
-    {"chemical-science-pack", 1},
-    {"production-science-pack", 1}
-  },
-  time = 5
+data.raw.technology.recycling.prerequisites = {}
+data.raw.technology.recycling.research_trigger = {
+  type = "mine-entity",
+  entity = "scrap"
 }
 
 -- Useless technology
