@@ -794,6 +794,32 @@ data:extend({
       density_multiplier = "5 / sqrt(control:gleba_water:frequency)"
     }
   },
+  --- Fertile mud / growing spots
+  {
+    type = "noise-expression",
+    name = "gleba_fertile_spots_coastal",
+    expression = "spot_noise{ x = x + wobble_noise_x * 15,\z
+                              y = y + wobble_noise_y * 15,\z
+                              seed0 = map_seed,\z
+                              seed1 = 1,\z
+                              candidate_spot_count = 80,\z
+                              suggested_minimum_candidate_point_spacing = 32,\z
+                              skip_span = 1,\z
+                              skip_offset = 0,\z
+                              region_size = 1024,\z
+                              density_expression = 80,\z
+                              spot_quantity_expression = 1000,\z
+                              spot_radius_expression = 32,\z
+                              hard_region_target_quantity = 0,\z
+                              spot_favorability_expression = 60,\z
+                              basement_value = -0.5,\z
+                              maximum_spot_basement_radius = 128}",
+    local_expressions =
+    {
+      wobble_noise_x = "multioctave_noise{x = x, y = y, persistence = 0.5, seed0 = map_seed, seed1 = 3000000, octaves = 2, input_scale = 1/20}",
+      wobble_noise_y = "multioctave_noise{x = x, y = y, persistence = 0.5, seed0 = map_seed, seed1 = 4000000, octaves = 2, input_scale = 1/20}"
+    }
+  },
 
   -- Noise functions
   {
