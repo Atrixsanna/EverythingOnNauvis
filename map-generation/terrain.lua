@@ -773,11 +773,11 @@ data:extend({
                               y = y + gleba_wobble_small_y + gleba_wobble_y/2,\z
                               seed0 = map_seed,\z
                               seed1 = 1,\z
-                              candidate_spot_count = 1,\z
+                              candidate_spot_count = 2,\z
                               suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
-                              skip_span = 1,\z
+                              skip_span = 2,\z
                               skip_offset = 0,\z
-                              region_size = 64*density_multiplier,\z
+                              region_size = 1024*density_multiplier,\z
                               density_expression = volcano_area / volcanism_sq,\z
                               spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
                               spot_radius_expression = volcano_spot_radius,\z
@@ -791,7 +791,8 @@ data:extend({
       volcano_spot_spacing = "1500 * volcanism",
       volcanism = "0.3 + 0.7 * slider_rescale(control:gleba_water:size, 3) / slider_rescale(control:gleba_water:frequency, 3)",
       volcanism_sq = "volcanism * volcanism",
-      density_multiplier = "5 / sqrt(control:gleba_water:frequency)"
+      --density_multiplier = "5 / sqrt(control:vulcanus_volcanism:frequency)"
+      density_multiplier = "1"
     }
   },
   --- Fertile mud / growing spots
@@ -970,7 +971,8 @@ data.raw["noise-expression"]["vulcanus_mountains_start"].expression = "2 * start
                                                                                                    y_distortion = 0.05 * vulcanus_starting_area_radius * (vulcanus_wobble_y + vulcanus_wobble_large_y + vulcanus_wobble_huge_y)}"
 -- Removes starter spot from vulcanus
 data.raw["noise-expression"]["mountain_volcano_spots"].expression = "raw_spots - starting_protector"
-data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.density_multiplier = "5 / sqrt(control:vulcanus_volcanism:frequency)"
+--data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.density_multiplier = "5 / sqrt(control:vulcanus_volcanism:frequency)"
+data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.density_multiplier = "1"
 data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spots = "spot_noise{x = x + vulcanus_wobble_x/2 + vulcanus_wobble_large_x/12 + vulcanus_wobble_huge_x/80,\z
                                                                                                  y = y + vulcanus_wobble_y/2 + vulcanus_wobble_large_y/12 + vulcanus_wobble_huge_y/80,\z
                                                                                                  seed0 = map_seed,\z
@@ -979,7 +981,7 @@ data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spo
                                                                                                  suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
                                                                                                  skip_span = 2,\z
                                                                                                  skip_offset = 1,\z
-                                                                                                 region_size = 64*density_multiplier,\z
+                                                                                                 region_size = 1024*density_multiplier,\z
                                                                                                  density_expression = volcano_area / volcanism_sq,\z
                                                                                                  spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
                                                                                                  spot_radius_expression = volcano_spot_radius,\z
