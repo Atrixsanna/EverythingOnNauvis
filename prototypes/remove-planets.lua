@@ -99,10 +99,8 @@ data_util.hide_prototype("technology", "planet-discovery-gleba")
 data_util.hide_prototype("technology", "planet-discovery-vulcanus")
 
 data.raw["autoplace-control"]["aquilo_crude_oil"] = nil
-data.raw["resource"]["scrap"].autoplace = nil  -- why is this needed? who knows... moving on...
-data.raw["autoplace-control"]["scrap"] = nil
 data.raw["autoplace-control"]["fulgora_cliff"] = nil
-data.raw["autoplace-control"]["fulgora_islands"] = nil
+--data.raw["autoplace-control"]["fulgora_islands"] = nil
 data.raw["autoplace-control"]["gleba_stone"] = nil
 data.raw["autoplace-control"]["gleba_cliff"] = nil
 data.raw["autoplace-control"]["vulcanus_coal"] = nil

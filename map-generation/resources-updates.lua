@@ -47,10 +47,6 @@ data.raw.planet["aquilo"].map_gen_settings.autoplace_controls = {nil}
 -- MARK: Add Fulgora resources to Nauvis
 --------------------------------------------------------------------------------
 
--- Add holmium as ore
-data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["holmium-ore"] = {}
-data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["holmium-ore"] = {}
-terrain.mask_off_ammonia_ocean("holmium-ore", "resource")
 
 --------------------------------------------------------------------------------
 -- MARK: Gleba
@@ -82,6 +78,7 @@ data.raw["autoplace-control"]["sulfuric_acid_geyser"].order = "b-z"
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["calcite"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["sulfuric-acid-geyser"] = {}
 data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["tungsten-ore"] = {}
+data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["scrap"] = {}
 
 -- autoplace_controls
 data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["sulfuric_acid_geyser"] = {}
