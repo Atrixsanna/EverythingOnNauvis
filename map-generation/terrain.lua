@@ -150,7 +150,7 @@ terrain.mask_nauvis_territory("iron-ore", "resource")
 terrain.mask_nauvis_territory("copper-ore", "resource")
 terrain.mask_nauvis_territory("coal", "resource")
 terrain.mask_nauvis_territory("uranium-ore", "resource")
-terrain.mask_nauvis_territory("calcite", "resource")
+terrain.mask_vulcano_terrain("calcite", "resource")
 terrain.mask_off_aquilo_territory("stone", "resource")
 -- END: Mask nauvis territory on all autoplace settings
 
