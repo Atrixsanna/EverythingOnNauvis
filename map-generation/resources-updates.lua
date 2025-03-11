@@ -62,10 +62,6 @@ data.raw["autoplace-control"]["gleba_plants"].localised_description = {"autoplac
 data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:sulfuric-acid-geyser:probability"] = "vulcanus_sulfuric_acid_geyser_probability"
 data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:sulfuric-acid-geyser:richness"] = "vulcanus_sulfuric_acid_geyser_richness"
 
--- Add calcite to volcanic rocks
-table.insert(data.raw["simple-entity"]["big-volcanic-rock"].minable.results, {type = "item", name = "calcite", amount_min = 2, amount_max = 8})
-table.insert(data.raw["simple-entity"]["huge-volcanic-rock"].minable.results, {type = "item", name = "calcite", amount_min = 3, amount_max = 15})
-
 -- Set vulcane as resource
 data.raw["autoplace-control"]["vulcanus_volcanism"].order = "z-volcanism"
 data.raw["autoplace-control"]["vulcanus_volcanism"].localised_description = {"autoplace-control-names.vulcanus_volcanism_description"}

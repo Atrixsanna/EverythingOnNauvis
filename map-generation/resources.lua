@@ -43,7 +43,6 @@ data:extend({
       mining_time = 1,
       result = "calcite",
     },
-    category = "hard-solid",
     collision_box = {{-0.1, -0.1}, {0.1, 0.1}},
     selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
     autoplace = resource_autoplace.resource_autoplace_settings {
