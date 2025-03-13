@@ -59,9 +59,6 @@ data:extend({
 -- Add prerequisite to promethium-science-pack
 table.insert(data.raw.technology["promethium-science-pack"].prerequisites, "solar-system-edge-discovery")
 
--- Aquilo
-data.raw.technology["lithium-processing"].prerequisites = {"rocket-turret", "advanced-asteroid-processing", "heating-tower", "asteroid-reprocessing", "electromagnetic-science-pack"}
-
 -- Gleba
 data.raw.technology["landfill"].prerequisites = nil
 data.raw.technology["landfill"].unit = nil
@@ -100,6 +97,8 @@ data.raw.technology.recycling.research_trigger = {
   type = "mine-entity",
   entity = "scrap"
 }
+data.raw.technology['holmium-processing'].prerequisites = {'recycling', 'oil-processing'}
+data.raw.technology['electromagnetic-plant'].prerequisites = {'holmium-processing', 'advanced-oil-processing'}
 
 -- Useless technology
 data_util.hide_prototype("technology", "rail-support-foundations")
@@ -107,3 +106,9 @@ data_util.hide_prototype("technology", "rail-support-foundations")
 -- Vulcanus
 data.raw.technology['calcite-processing'].prerequisites = {}
 data.raw.technology['tungsten-carbide'].prerequisites = {}
+data.raw.technology['big-mining-drill'].prerequisites = {'foundry', 'electric-mining-drill', 'electric-engine'}
+
+-- Aquilo
+data.raw.technology['lithium-processing'].prerequisites = {'holmium-processing'}
+data.raw.technology['cryogenic-plant'].prerequisites = {'lithium-processing'}
+data.raw.technology['quantum-processor'].prerequisites = {'cryogenic-science-pack', 'electromagnetic-plant'}
