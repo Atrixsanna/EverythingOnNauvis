@@ -749,14 +749,14 @@ data.raw["autoplace-control"]["gleba_water"].can_be_disabled = true
 
 -- START: Update noise expressions
 -- Mask gleba plants to gleba terrain
-data.raw["noise-expression"]["gleba_plants_noise"].expression = "mask_gleba_territory(abs(multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 700000, octaves = 3, input_scale = 1/20 }\z
-                                                                                          * multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 200000, octaves = 3, input_scale = 1/6 * control:gleba_plants:frequency }))"
-data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "mask_gleba_territory(abs(multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 750000, octaves = 3, input_scale = 1/20 * control:gleba_plants:frequency }\z
-                                                                                            * multioctave_noise{x = x, y = y, persistence = 0.8, seed0 = map_seed, seed1 = 250000, octaves = 3, input_scale = 1/6 * control:gleba_plants:frequency }))"
+data.raw["noise-expression"]["gleba_plants_noise"].expression = "mask_gleba_territory(abs(multioctave_noise{x = x, y = abs_y, persistence = 0.8, seed0 = map_seed, seed1 = 700000, octaves = 3, input_scale = 1/20 }\z
+                                                                                          * multioctave_noise{x = x, y = abs_y, persistence = 0.8, seed0 = map_seed, seed1 = 200000, octaves = 3, input_scale = 1/6 * control:gleba_plants:frequency }))"
+data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "mask_gleba_territory(abs(multioctave_noise{x = x, y = abs_y, persistence = 0.8, seed0 = map_seed, seed1 = 750000, octaves = 3, input_scale = 1/20 * control:gleba_plants:frequency }\z
+                                                                                            * multioctave_noise{x = x, y = abs_y, persistence = 0.8, seed0 = map_seed, seed1 = 250000, octaves = 3, input_scale = 1/6 * control:gleba_plants:frequency }))"
 -- END: Update noise expressions
 
-data.raw["noise-expression"]["gleba_biome_mask_green"].expression = "floor(y / 128) % 2 == 0"
-data.raw["noise-expression"]["gleba_biome_mask_red"].expression = "floor(y / 128) % 2 == 1"
+data.raw["noise-expression"]["gleba_biome_mask_green"].expression = "floor(abs_y / 128) % 2 == 0"
+data.raw["noise-expression"]["gleba_biome_mask_red"].expression = "floor(abs_y / 128) % 2 == 1"
 
 -- New noise expressions and noise functions
 data:extend({
@@ -769,7 +769,7 @@ data:extend({
     local_expressions =
     {
       raw_spots = "spot_noise{x = x + gleba_wobble_small_x + gleba_wobble_x/2,\z
-                              y = y + gleba_wobble_small_y + gleba_wobble_y/2,\z
+                              y = abs_y + gleba_wobble_small_y + gleba_wobble_y/2,\z
                               seed0 = map_seed,\z
                               seed1 = 1,\z
                               candidate_spot_count = 2,\z
@@ -799,7 +799,7 @@ data:extend({
     type = "noise-expression",
     name = "gleba_fertile_spots_coastal",
     expression = "spot_noise{ x = x + wobble_noise_x * 15,\z
-                              y = y + wobble_noise_y * 15,\z
+                              y = abs_y + wobble_noise_y * 15,\z
                               seed0 = map_seed,\z
                               seed1 = 1,\z
                               candidate_spot_count = 80,\z
@@ -816,8 +816,8 @@ data:extend({
                               maximum_spot_basement_radius = 128}",
     local_expressions =
     {
-      wobble_noise_x = "multioctave_noise{x = x, y = y, persistence = 0.5, seed0 = map_seed, seed1 = 3000000, octaves = 2, input_scale = 1/20}",
-      wobble_noise_y = "multioctave_noise{x = x, y = y, persistence = 0.5, seed0 = map_seed, seed1 = 4000000, octaves = 2, input_scale = 1/20}"
+      wobble_noise_x = "multioctave_noise{x = x, y = abs_y, persistence = 0.5, seed0 = map_seed, seed1 = 3000000, octaves = 2, input_scale = 1/20}",
+      wobble_noise_y = "multioctave_noise{x = x, y = abs_y, persistence = 0.5, seed0 = map_seed, seed1 = 4000000, octaves = 2, input_scale = 1/20}"
     }
   },
 
