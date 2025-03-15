@@ -768,7 +768,8 @@ data:extend({
     expression = "raw_spots",
     local_expressions =
     {
-      raw_spots = "spot_noise{x = x + gleba_wobble_small_x + gleba_wobble_x/2,\z
+      raw_spots = "if(abs(y+1) < 22, 0,\z
+                   spot_noise{x = x + gleba_wobble_small_x + gleba_wobble_x/2,\z
                               y = abs_y + gleba_wobble_small_y + gleba_wobble_y/2,\z
                               seed0 = map_seed,\z
                               seed1 = 1,\z
@@ -783,7 +784,7 @@ data:extend({
                               hard_region_target_quantity = 0,\z
                               spot_favorability_expression = volcano_area,\z
                               basement_value = 0,\z
-                              maximum_spot_basement_radius = volcano_spot_radius}",
+                              maximum_spot_basement_radius = volcano_spot_radius})",
 
       volcano_area = "lerp(vulcanus_mountains_biome_full_pre_volcano, 0, vulcanus_starting_area)",
       volcano_spot_radius = "300 * volcanism * sqrt(1 + control:gleba_water:size)",
