@@ -99,6 +99,9 @@ data.raw.technology.recycling.research_trigger = {
 }
 data.raw.technology['holmium-processing'].prerequisites = {'recycling', 'oil-processing'}
 data.raw.technology['electromagnetic-plant'].prerequisites = {'holmium-processing', 'advanced-oil-processing'}
+data_util.remove_packs("tesla-weapons", {"utility-science-pack", "space-science-pack"})
+-- remove mil4
+data.raw.technology['tesla-weapons'].prerequisites = {"electromagnetic-science-pack"}
 
 -- Useless technology
 data_util.hide_prototype("technology", "rail-support-foundations")
@@ -111,4 +114,6 @@ data.raw.technology['big-mining-drill'].prerequisites = {'foundry', 'electric-mi
 -- Aquilo
 data.raw.technology['lithium-processing'].prerequisites = {'holmium-processing'}
 data.raw.technology['cryogenic-plant'].prerequisites = {'lithium-processing'}
-data.raw.technology['quantum-processor'].prerequisites = {'cryogenic-science-pack', 'electromagnetic-plant'}
+data.raw.technology['quantum-processor'].prerequisites = {'cryogenic-science-pack', 'electromagnetic-plant', 'carbon-fiber','tungsten-carbide'}
+data_util.remove_packs("quantum-processor", {"utility-science-pack", "space-science-pack"})
+data_util.remove_packs("railgun", {"utility-science-pack", "space-science-pack"})
