@@ -772,11 +772,11 @@ data:extend({
                               y = abs_y + gleba_wobble_small_y + gleba_wobble_y/2,\z
                               seed0 = map_seed,\z
                               seed1 = 1,\z
-                              candidate_spot_count = 2,\z
-                              suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
+                              candidate_spot_count = 1,\z
+                              suggested_minimum_candidate_point_spacing = 400,\z
                               skip_span = 2,\z
                               skip_offset = 0,\z
-                              region_size = 1024*density_multiplier,\z
+                              region_size = 700,\z
                               density_expression = volcano_area / volcanism_sq,\z
                               spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
                               spot_radius_expression = volcano_spot_radius,\z
@@ -786,8 +786,7 @@ data:extend({
                               maximum_spot_basement_radius = volcano_spot_radius})",
 
       volcano_area = "lerp(vulcanus_mountains_biome_full_pre_volcano, 0, vulcanus_starting_area)",
-      volcano_spot_radius = "300 * volcanism * sqrt(1 + control:gleba_water:size)",
-      volcano_spot_spacing = "1500 * volcanism",
+      volcano_spot_radius = "200",
       volcanism = "0.3 + 0.7 * slider_rescale(control:gleba_water:size, 3) / slider_rescale(control:gleba_water:frequency, 3)",
       volcanism_sq = "volcanism * volcanism",
       --density_multiplier = "5 / sqrt(control:vulcanus_volcanism:frequency)"
@@ -977,10 +976,10 @@ data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spo
                                                                                                  seed0 = map_seed,\z
                                                                                                  seed1 = 1,\z
                                                                                                  candidate_spot_count = 1,\z
-                                                                                                 suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
+                                                                                                 suggested_minimum_candidate_point_spacing = 400,\z
                                                                                                  skip_span = 2,\z
                                                                                                  skip_offset = 1,\z
-                                                                                                 region_size = 1024*density_multiplier,\z
+                                                                                                 region_size = 700,\z
                                                                                                  density_expression = volcano_area / volcanism_sq,\z
                                                                                                  spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
                                                                                                  spot_radius_expression = volcano_spot_radius,\z
