@@ -755,8 +755,7 @@ data.raw["noise-expression"]["gleba_plants_noise_b"].expression = "mask_gleba_te
                                                                                             * multioctave_noise{x = x, y = abs_y, persistence = 0.8, seed0 = map_seed, seed1 = 250000, octaves = 3, input_scale = 1/6 * control:gleba_plants:frequency }))"
 -- END: Update noise expressions
 
-data.raw["noise-expression"]["gleba_biome_mask_green"].expression = "floor(abs_y / 128) % 2 == 0"
-data.raw["noise-expression"]["gleba_biome_mask_red"].expression = "floor(abs_y / 128) % 2 == 1"
+data.raw["noise-expression"]['gleba_aux'].local_expressions.aux_pattern = "multioctave_noise{x = x + gleba_wobble_x * 15 + gleba_wobble_small_x * 5, y = abs_y + gleba_wobble_y * 15 + gleba_wobble_small_y * 5, persistence = 0.75, octaves = 7, input_scale = 1/7, seed0 = map_seed, seed1 = 7000}"
 
 -- New noise expressions and noise functions
 data:extend({
