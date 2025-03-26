@@ -776,7 +776,7 @@ data:extend({
                               suggested_minimum_candidate_point_spacing = 400,\z
                               skip_span = 2,\z
                               skip_offset = 0,\z
-                              region_size = 700,\z
+                              region_size = 600,\z
                               density_expression = volcano_area / volcanism_sq,\z
                               spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
                               spot_radius_expression = volcano_spot_radius,\z
@@ -979,7 +979,7 @@ data.raw["noise-expression"]["mountain_volcano_spots"].local_expressions.raw_spo
                                                                                                  suggested_minimum_candidate_point_spacing = 400,\z
                                                                                                  skip_span = 2,\z
                                                                                                  skip_offset = 1,\z
-                                                                                                 region_size = 700,\z
+                                                                                                 region_size = 600,\z
                                                                                                  density_expression = volcano_area / volcanism_sq,\z
                                                                                                  spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
                                                                                                  spot_radius_expression = volcano_spot_radius,\z
