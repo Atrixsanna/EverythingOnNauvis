@@ -303,7 +303,7 @@ data:extend({
   {
     type = "noise-expression",
     name = "aquilo_max_elevation",
-    expression = "-1"
+    expression = "1"
   },
   {
     type = "noise-expression",
