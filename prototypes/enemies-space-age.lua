@@ -51,7 +51,7 @@ make_wriggler("gargantuan-", gleba_gargantuan_scale, 450000, 1.8,
   }, simulations.factoriopedia_gleba_enemy_big_wriggler, simulations.factoriopedia_gleba_enemy_big_wriggler_premature, space_age_sounds.wriggler_pentapod.big)
 
 
-make_strafer("behemoth-", gleba_behemoth_scale, 20000, 1.6, 5.5, 26, 31, 36,
+make_strafer("behemoth-", gleba_titan_scale, 20000, 1.6, 5.5, 26, 31, 36,
   {
     mask = fade(gleba_behemoth_mask_tint, 0.4),
     mask_thigh = fade(gleba_behemoth_mask2_tint, 0.2),
@@ -59,7 +59,7 @@ make_strafer("behemoth-", gleba_behemoth_scale, 20000, 1.6, 5.5, 26, 31, 36,
     projectile_mask = big_wriggler_mask_tint, -- same as wriggler mask tint
     projectile = big_wriggler_body_tint  -- same as wriggler body tint
   }, simulations.factoriopedia_gleba_enemy_big_strafer, space_age_sounds.strafer_pentapod.big)
-make_strafer("titan-", gleba_titan_scale, 200000, 1.6, 5.5, 26, 31, 36,
+make_strafer("titan-", gleba_gargantuan_scale, 200000, 1.6, 5.5, 26, 31, 36,
   {
     mask = fade(gleba_titan_mask_tint, 0.4),
     mask_thigh = fade(gleba_titan_mask2_tint, 0.2),
@@ -69,14 +69,14 @@ make_strafer("titan-", gleba_titan_scale, 200000, 1.6, 5.5, 26, 31, 36,
   }, simulations.factoriopedia_gleba_enemy_big_strafer, space_age_sounds.strafer_pentapod.big)
 
 
-make_stomper("behemoth-", gleba_behemoth_scale, 120000, 1.6, 2.8,
+make_stomper("behemoth-", gleba_titan_scale, 120000, 1.6, 2.8,
   {
     mask = fade(gleba_behemoth_mask_tint, 0.4),
     mask_thigh = fade(gleba_behemoth_mask2_tint, 0.3),
     body = grey_overlay(gleba_behemoth_body_tint, 0.1),
     body_thigh = lerp_color(gleba_behemoth_body_tint, grey_overlay({250,108,0,255}, 0.7), 0.1) -- more orange/yellow
   }, simulations.factoriopedia_gleba_enemy_big_stomper, space_age_sounds.stomper_pentapod.big)
-make_stomper("titan-", gleba_titan_scale, 1000000, 1.6, 2.8,
+make_stomper("titan-", gleba_gargantuan_scale, 1000000, 1.6, 2.8,
   {
     mask = fade(gleba_titan_mask_tint, 0.4),
     mask_thigh = fade(gleba_titan_mask2_tint, 0.3),
