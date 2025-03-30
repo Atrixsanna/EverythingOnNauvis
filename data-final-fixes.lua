@@ -3,5 +3,3 @@ nauvis2.name = "nauvis2"
 data:extend{ nauvis2 }
 
 require("prototypes.remove-planets")
-
--- require("map-generation.resource-final-fixes")
