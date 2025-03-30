@@ -108,7 +108,7 @@ return function(terrain)
                                                                                              seed0 = map_seed,\z
                                                                                              seed1 = 1,\z
                                                                                              candidate_spot_count = 1,\z
-                                                                                             suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
+                                                                                             suggested_minimum_candidate_point_spacing = 400,\z
                                                                                              skip_span = 2,\z
                                                                                              skip_offset = 1,\z
                                                                                              region_size = 600,\z
