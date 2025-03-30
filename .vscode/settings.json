@@ -6,8 +6,5 @@
             "active": true
         }
     ],
-    "Lua.workspace.userThirdParty": [
-        "c:\\Users\\Developer\\AppData\\Roaming\\Code\\User\\workspaceStorage\\b35c9a099d2cebb54838af116585d702\\justarandomgeek.factoriomod-debug\\sumneko-3rd"
-    ],
     "Lua.workspace.checkThirdParty": "ApplyInMemory"
 }
