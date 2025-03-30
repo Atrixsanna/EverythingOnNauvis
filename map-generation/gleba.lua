@@ -165,7 +165,7 @@ return function(terrain)
                                 suggested_minimum_candidate_point_spacing = volcano_spot_spacing,\z
                                 skip_span = 2,\z
                                 skip_offset = 0,\z
-                                region_size = 1024*density_multiplier,\z
+                                region_size = 600,\z
                                 density_expression = volcano_area / volcanism_sq,\z
                                 spot_quantity_expression = volcano_spot_radius * volcano_spot_radius,\z
                                 spot_radius_expression = volcano_spot_radius,\z
@@ -199,7 +199,7 @@ return function(terrain)
                                 suggested_minimum_candidate_point_spacing = 32,\z
                                 skip_span = 1,\z
                                 skip_offset = 0,\z
-                                region_size = 1024,\z
+                                region_size = 600,\z
                                 density_expression = 80,\z
                                 spot_quantity_expression = 1000,\z
                                 spot_radius_expression = 32,\z
