@@ -23,16 +23,17 @@ data:extend({
   {
     type = 'noise-expression',
     name = 'moat',
-    expression = f('(abs_y < %d) + ((y*y) + (x*x) < 4*(%d^2)) - 2*((y*y + x*x) < (0.5 * %d^2))', config.starting_radius,
-      -- expression = f('(abs_y < %d)', config.starting_radius,
-      config.starting_radius, config.starting_radius),
+    expression = f('(abs_y < %d) - (sqrt( (fx*fx) + (fy*fy) ) < %d)',
+      config.river_width, config.spawn_island_size),
+      local_expressions = {
+        fx = 'x+0.5',
+        fy = 'y+0.5',
+      }
   },
   {
     type = 'noise-function',
     name = 'is_roughly_biter_area',
     parameters = { "x", "y" },
     expression = 'abs_y >= ' .. config.biter_nest_distance .. ' + (abs(x) * 0.45) + (basis_noise{x=x, y=abs_y, seed0=map_seed, seed1=1234, input_scale = 1/8, output_scale = 20})',
-  }
+  },
 })
-
-local x = 1

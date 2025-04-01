@@ -1,5 +1,8 @@
 return {
     starting_radius = 32,
+    river_width = 32,
+    spawn_island_size = 9,
+
     new_starting_radius = "0.6", -- this is not a tile distance
     crude_oil_penalty = 0.045,
     enemy_autoplace_penalty = 0.045,
