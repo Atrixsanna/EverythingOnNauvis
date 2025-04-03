@@ -214,3 +214,108 @@ data.raw.technology['carbon-fiber'].unit.count = 50
 data.raw.technology['stack-inserter'].unit.count = 200
 data.raw.technology['transport-belt-capacity-1'].unit.count = 250
 data.raw.technology['transport-belt-capacity-2'].unit.count = 500
+data.raw.technology['electric-weapons-damage-1'].unit.count = 100
+data.raw.technology['electric-weapons-damage-2'].unit.count = 200
+data.raw.technology['electric-weapons-damage-3'].unit.count = 300
+data.raw.technology['electric-weapons-damage-4'].unit.count_formula = "500 * (L - 3)"
+
+--set damage modifiers (previously Functions.combat_balance in scenario)
+local technology_names = {
+  'physical-projectile-damage-1',
+  'physical-projectile-damage-2',
+  'physical-projectile-damage-3',
+  'physical-projectile-damage-4',
+  'physical-projectile-damage-5',
+  'physical-projectile-damage-6',
+  'physical-projectile-damage-7'
+}
+for _,technology in pairs(technology_names) do
+  local effect_to_remove
+  for i,effect in pairs(data.raw.technology[technology].effects) do
+    if effect.type == 'turret-attack' then
+      effect_to_remove = i
+    elseif effect.type == 'ammo-damage' and effect.ammo_category == 'bullet' then
+      effect.modifier = 0.3
+      if technology == 'physical-projectile-damage-6' then effect.modifier = 2.34 end --uranium ammo should do about 250 damage at this point, base 48 so total modifier 4
+      if technology == 'physical-projectile-damage-7' then effect.modifier = 0.5 end
+    elseif effect.type == 'ammo-damage' and effect.ammo_category == 'shotgun-shell' then
+      effect.modifier = 0.6
+    end
+  end
+  table.remove(data.raw.technology[technology].effects, effect_to_remove)
+end
+
+local technology_names = {
+  'refined-flammables-1',
+  'refined-flammables-2',
+  'refined-flammables-3',
+  'refined-flammables-4',
+  'refined-flammables-5',
+  'refined-flammables-6',
+  'refined-flammables-7'
+}
+for _,technology in pairs(technology_names) do
+  for i,effect in pairs(data.raw.technology[technology].effects) do
+    if effect.type == 'turret-attack' then
+      effect.modifier = 0.02
+    end
+  end
+end
+
+local technology_names = {
+  'stronger-explosives-1',
+  'stronger-explosives-2',
+  'stronger-explosives-3',
+  'stronger-explosives-4',
+  'stronger-explosives-5',
+  'stronger-explosives-6',
+  'stronger-explosives-7'
+}
+for _,technology in pairs(technology_names) do
+  for i,effect in pairs(data.raw.technology[technology].effects) do
+    if effect.type == 'ammo-damage' and effect.ammo_category == 'grenade' then
+      effect.modifier = 0.5
+    end
+  end
+  if technology == 'stronger-explosives-3' then table.insert(data.raw.technology[technology].effects, {type="turret-attack",turret_id="rocket-turret",modifier=0.5}) end
+  if technology == 'stronger-explosives-4' then table.insert(data.raw.technology[technology].effects, {type="turret-attack",turret_id="rocket-turret",modifier=0.5}) end
+  if technology == 'stronger-explosives-5' then table.insert(data.raw.technology[technology].effects, {type="turret-attack",turret_id="rocket-turret",modifier=0.5}) end
+  if technology == 'stronger-explosives-6' then table.insert(data.raw.technology[technology].effects, {type="turret-attack",turret_id="rocket-turret",modifier=0.5}) end
+  if technology == 'stronger-explosives-7' then table.insert(data.raw.technology[technology].effects, {type="turret-attack",turret_id="rocket-turret",modifier=0.5}) end
+end
+
+local technology_names = {
+  'laser-weapons-damage-1',
+  'laser-weapons-damage-2',
+  'laser-weapons-damage-3',
+  'laser-weapons-damage-4',
+  'laser-weapons-damage-5',
+  'laser-weapons-damage-6',
+  'laser-weapons-damage-7'
+}
+local laser_turret_modifier = 0.1
+for _,technology in pairs(technology_names) do
+  table.insert(data.raw.technology[technology].effects, {type="turret-attack",turret_id="laser-turret",modifier=laser_turret_modifier})
+  laser_turret_modifier = laser_turret_modifier + 0.1
+end
+
+local technology_names = {
+  'electric-weapons-damage-3',
+  'electric-weapons-damage-4'
+}
+for _,technology in pairs(technology_names) do
+  for i,effect in pairs(data.raw.technology[technology].effects) do
+    if effect.type == 'ammo-damage' and effect.ammo_category == 'tesla' then
+      effect.modifier = 1.2
+    end
+  end
+  table.insert(data.raw.technology[technology].effects, {type="turret-attack",turret_id="tesla-turret",modifier=0.75})
+end
+
+--change base damage
+for _,effect in pairs(data.raw.ammo['uranium-rounds-magazine'].ammo_type.action.action_delivery.target_effects) do
+  if effect.type == 'damage' then effect.damage.amount = 48 end
+end
+for _,effect in pairs(data.raw.projectile['piercing-shotgun-pellet'].action.action_delivery.target_effects) do
+  if effect.type == 'damage' then effect.damage.amount = 12 end
+end
