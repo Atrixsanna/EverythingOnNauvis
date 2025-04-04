@@ -316,6 +316,4 @@ end
 for _,effect in pairs(data.raw.ammo['uranium-rounds-magazine'].ammo_type.action.action_delivery.target_effects) do
   if effect.type == 'damage' then effect.damage.amount = 48 end
 end
-for _,effect in pairs(data.raw.projectile['piercing-shotgun-pellet'].action.action_delivery.target_effects) do
-  if effect.type == 'damage' then effect.damage.amount = 12 end
-end
+data.raw.projectile['piercing-shotgun-pellet'].action.action_delivery.target_effects.damage.amount = 12
