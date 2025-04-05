@@ -43,24 +43,22 @@ return function(terrain)
             data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["vulcanus-chimney-truncated"] = {}
             data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["huge-volcanic-rock"] = {}
             data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["big-volcanic-rock"] = {}
-
-
-            data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:sulfuric-acid-geyser:probability"] =
-            "vulcanus_sulfuric_acid_geyser_probability"
-            data.raw.planet["nauvis"].map_gen_settings.property_expression_names["entity:sulfuric-acid-geyser:richness"] =
-            "vulcanus_sulfuric_acid_geyser_richness"
-
-            data.raw["autoplace-control"]["vulcanus_volcanism"].order = "z-volcanism"
-            data.raw["autoplace-control"]["vulcanus_volcanism"].localised_description = {
-                "autoplace-control-names.vulcanus_volcanism_description" }
-            data.raw["autoplace-control"]["vulcanus_volcanism"].category = "resource"
-            data.raw["autoplace-control"]["sulfuric_acid_geyser"].order = "b-z"
-
+            data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["sulfuric-acid-geyser"] = {}
             data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["calcite"] = {}
             data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["sulfuric-acid-geyser"] = {}
             data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["tungsten-ore"] = {}
             data.raw.planet["nauvis"].map_gen_settings.autoplace_settings.entity.settings["scrap"] = {}
             data.raw.planet["nauvis"].map_gen_settings.autoplace_controls["sulfuric_acid_geyser"] = {}
+
+            --- When masking is applied, the probability expression for sulfuric-acid-geysers will be set to a mask of default_sulfuric_acid_geyser            
+            data.raw["noise-expression"]["default_sulfuric_acid_geyser"].expression = "vulcanus_sulfuric_acid_geyser_probability"
+            data.raw["resource"]["sulfuric-acid-geyser"].autoplace.richness_expression = "vulcanus_sulfuric_acid_geyser_richness" 
+            
+            data.raw["autoplace-control"]["vulcanus_volcanism"].order = "z-volcanism"
+            data.raw["autoplace-control"]["vulcanus_volcanism"].localised_description = {
+                "autoplace-control-names.vulcanus_volcanism_description" }
+            data.raw["autoplace-control"]["vulcanus_volcanism"].category = "resource"
+            data.raw["autoplace-control"]["sulfuric_acid_geyser"].order = "b-z"
 
             data.raw["noise-expression"]["vulcanus_starting_calcite"].expression = "-inf"
             data.raw["noise-expression"]["vulcanus_calcite_probability"].expression =
@@ -159,7 +157,7 @@ return function(terrain)
                     -- Noise expression for vulcano spot and close surround as mask
                     type = "noise-expression",
                     name = "volcano_mask",
-                    expression = "max(updated_volcanic_folds, lava_mountains_range, lava_hot_mountains_range) > 0"
+                    expression = "mask_prevent_fixed(max(updated_volcanic_folds, lava_mountains_range, lava_hot_mountains_range) > 0)"
                 },
                 {
                     -- Noise expression for all vulcanus terrain as mask
