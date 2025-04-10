@@ -19,26 +19,6 @@ data:extend({
         space_location = "solar-system-edge",
         use_icon_overlay_constant = true
       },
-      {
-        type = "unlock-recipe",
-        recipe = "ammoniacal-solution-separation",
-      },
-      {
-        type = "unlock-recipe",
-        recipe = "solid-fuel-from-ammonia"
-      },
-      {
-        type = "unlock-recipe",
-        recipe = "ammonia-rocket-fuel"
-      },
-      {
-        type = "unlock-recipe",
-        recipe = "ice-platform",
-      },
-      {
-        type = "unlock-recipe",
-        recipe = "lightning-rod",
-      },
     },
     prerequisites = {"space-platform-thruster"},
     unit =
@@ -65,6 +45,12 @@ data.raw.technology['promethium-science-pack'].unit.count = 10
 data_util.hide_prototype("technology", "rail-support-foundations")
 
 -- Nauvis
+data.raw.technology["destroyer"].prerequisites = {"distractor"}
+data_util.remove_packs('destroyer', {'utility-science-pack'})
+data_util.remove_packs('electric-weapons-damage-1', {'utility-science-pack'})
+data_util.remove_packs('electric-weapons-damage-2', {'utility-science-pack', 'space-science-pack'})
+data_util.remove_packs('electric-weapons-damage-3', {'utility-science-pack', 'space-science-pack'})
+data_util.remove_packs('electric-weapons-damage-4', {'utility-science-pack', 'space-science-pack'})
 data.raw.technology["uranium-ammo"].prerequisites = {"military-4", "uranium-processing"}
 data.raw.technology["epic-quality"].prerequisites = {"quality-module", "space-science-pack"}
 data.raw.technology["epic-quality"].unit = {
@@ -77,7 +63,7 @@ data.raw.technology["epic-quality"].unit = {
   },
   time = 60
 }
-data.raw.technology["legendary-quality"].prerequisites = {"epic-quality", "utility-science-pack"}
+data.raw.technology["legendary-quality"].prerequisites = {"epic-quality","agricultural-science-pack"}
 data.raw.technology["legendary-quality"].unit = {
   count = 250,
   ingredients = {
@@ -85,7 +71,7 @@ data.raw.technology["legendary-quality"].unit = {
     {"logistic-science-pack", 1},
     {"chemical-science-pack", 1},
     {"space-science-pack", 1},
-    {"utility-science-pack", 1}
+    {"agricultural-science-pack", 1},
   },
   time = 60
 }
@@ -117,17 +103,19 @@ data.raw.technology['heating-tower'].unit = {
   },
   time = 30
 }
-data.raw.technology["carbon-fiber"].prerequisites = {"agricultural-science-pack", "chemical-science-pack"}
-data_util.remove_packs("carbon-fiber", {"space-science-pack"})
+data.raw.technology["carbon-fiber"].prerequisites = {"agricultural-science-pack", "logistic-science-pack"}
+data_util.remove_packs("carbon-fiber", {"chemical-science-pack", "space-science-pack"})
 data_util.remove_packs("toolbelt-equipment", {"space-science-pack"})
 data.raw.technology["stack-inserter"].prerequisites = {"carbon-fiber", "production-science-pack", "bulk-inserter"}
 data_util.remove_packs("stack-inserter", {"space-science-pack","utility-science-pack"})
 data.raw.technology['stack-inserter'].unit.count = 100
+data.raw.technology["advanced-asteroid-processing"].prerequisites = {"agricultural-science-pack", "space-science-pack"}
+data_util.remove_packs("advanced-asteroid-processing", {"utility-science-pack", "production-science-pack"})
 data_util.remove_packs("transport-belt-capacity-1", {"space-science-pack","utility-science-pack"})
 data.raw.technology['transport-belt-capacity-1'].unit.count = 200
 data_util.remove_packs("transport-belt-capacity-2", {"space-science-pack","utility-science-pack"})
 data.raw.technology['transport-belt-capacity-2'].unit.count = 300
-data_util.remove_packs("rocket-turret", {"space-science-pack"})
+data_util.remove_packs("rocket-turret", {"chemical-science-pack", "space-science-pack"})
 data.raw.technology['captivity'].prerequisites = {"agricultural-science-pack","rocketry"}
 data.raw.technology['captivity'].unit = {
   count = 150,
@@ -167,26 +155,46 @@ data.raw.technology.recycling.research_trigger = {
   entity = "scrap"
 }
 data.raw.technology['holmium-processing'].prerequisites = {'recycling', 'oil-processing'}
-data.raw.technology['electromagnetic-plant'].prerequisites = {'holmium-processing', 'advanced-oil-processing'}
-data.raw.technology['tesla-weapons'].prerequisites = {"electromagnetic-science-pack", "military-4"}
-data_util.remove_packs("tesla-weapons", {"space-science-pack"})
+data.raw.technology['electromagnetic-plant'].prerequisites = {'holmium-processing'}
+data.raw.technology['tesla-weapons'].prerequisites = {"electromagnetic-science-pack", "military-3"}
+data_util.remove_packs("tesla-weapons", {"space-science-pack", "utility-science-pack"})
 
 -- Vulcanus
 data.raw.technology['calcite-processing'].prerequisites = {}
+table.insert(data.raw.technology['calcite-processing'].effects, { type="unlock-recipe", recipe="oil-refinery" })
+table.insert(data.raw.technology['calcite-processing'].effects, { type="unlock-recipe", recipe="chemical-plant" })
+table.insert(data.raw.technology['calcite-processing'].effects, { type="unlock-recipe", recipe="lubricant" })
 data.raw.technology['tungsten-carbide'].prerequisites = {}
 data.raw.technology['big-mining-drill'].prerequisites = {'foundry', 'electric-mining-drill', 'electric-engine'}
 
 -- Aquilo
 data.raw.technology['lithium-processing'].prerequisites = {'holmium-processing'}
 data.raw.technology['cryogenic-plant'].prerequisites = {'lithium-processing'}
+table.insert(data.raw.technology['cryogenic-plant'].effects, { type="unlock-recipe", recipe="ammoniacal-solution-separation" })
+table.insert(data.raw.technology['cryogenic-plant'].effects, { type="unlock-recipe", recipe="solid-fuel-from-ammonia" })
+table.insert(data.raw.technology['cryogenic-plant'].effects, { type="unlock-recipe", recipe="ammonia-rocket-fuel" })
+table.insert(data.raw.technology['cryogenic-plant'].effects, { type="unlock-recipe", recipe="ice-platform" })
 data.raw.technology['quantum-processor'].prerequisites = {'cryogenic-plant', 'electromagnetic-plant', 'carbon-fiber','tungsten-carbide'}
-data.raw.technology['railgun'].prerequisites = {"quantum-processor", "military-4"}
+data.raw.technology['railgun'].prerequisites = {"quantum-processor", "military-3"}
 data.raw.technology['captive-biter-spawner'].prerequisites = {"biter-egg-handling","kovarex-enrichment-process"}
-data_util.remove_packs("quantum-processor", {'cryogenic-science-pack', "utility-science-pack"})
-data_util.remove_packs("railgun", {'space-science-pack', 'cryogenic-science-pack'})
+data_util.remove_packs("quantum-processor", {'cryogenic-science-pack', "utility-science-pack", 'production-science-pack', 'space-science-pack', 'agricultural-science-pack'})
+data_util.remove_packs("railgun", {'space-science-pack', 'cryogenic-science-pack', 'utility-science-pack', 'agricultural-science-pack'})
 data_util.remove_packs("captive-biter-spawner", {'space-science-pack', 'cryogenic-science-pack'})
-data_util.remove_packs("fusion-reactor", {'cryogenic-science-pack'})
-data_util.remove_packs("fusion-reactor-equipment", {'cryogenic-science-pack'})
+data_util.remove_packs("fusion-reactor", {'cryogenic-science-pack', 'utility-science-pack', 'space-science-pack', 'agricultural-science-pack'})
+data_util.remove_packs("fusion-reactor-equipment", {'cryogenic-science-pack', 'space-science-pack', 'agricultural-science-pack'})
+
+--end
+data.raw.technology['research-productivity'].prerequisites = {"biolab"}
+data.raw.technology['research-productivity'].unit = {
+  count_formula = "100 + 100 * L",
+  ingredients = {
+    {"automation-science-pack", 1},
+    {"logistic-science-pack", 1},
+    {"chemical-science-pack", 1},
+    {"agricultural-science-pack", 1}
+  },
+  time = 120
+}
 
 -- mid and late game science cost reductions
 data.raw.technology['tesla-weapons'].unit.count = 250
@@ -214,6 +222,9 @@ data.raw.technology['carbon-fiber'].unit.count = 50
 data.raw.technology['stack-inserter'].unit.count = 200
 data.raw.technology['transport-belt-capacity-1'].unit.count = 250
 data.raw.technology['transport-belt-capacity-2'].unit.count = 500
+data.raw.technology['military-4'].unit.count = 50
+data.raw.technology['distractor'].unit.count = 100
+data.raw.technology['destroyer'].unit.count = 200
 data.raw.technology['electric-weapons-damage-1'].unit.count = 100
 data.raw.technology['electric-weapons-damage-2'].unit.count = 200
 data.raw.technology['electric-weapons-damage-3'].unit.count = 300
@@ -232,17 +243,24 @@ local technology_names = {
 for _,technology in pairs(technology_names) do
   local effect_to_remove
   for i,effect in pairs(data.raw.technology[technology].effects) do
-    if effect.type == 'turret-attack' then
-      effect_to_remove = i
+    if effect.type == 'turret-attack' and effect.turret_id == 'gun-turret' then
+      if technology == 'physical-projectile-damage-1' then effect_to_remove = i
+      elseif technology == 'physical-projectile-damage-2' then effect_to_remove = i
+      elseif technology == 'physical-projectile-damage-3' then effect.modifier = 0.25
+      elseif technology == 'physical-projectile-damage-4' then effect.modifier = 0.25
+      else effect.modifier = 0.5
+      end
     elseif effect.type == 'ammo-damage' and effect.ammo_category == 'bullet' then
-      effect.modifier = 0.3
-      if technology == 'physical-projectile-damage-6' then effect.modifier = 2.34 end --uranium ammo should do about 250 damage at this point, base 48 so total modifier 4
-      if technology == 'physical-projectile-damage-7' then effect.modifier = 0.5 end
+      if technology == 'physical-projectile-damage-1' then effect.modifier = 0.2
+      elseif technology == 'physical-projectile-damage-2' then effect.modifier = 0.3
+      elseif technology == 'physical-projectile-damage-3' then effect.modifier = 0.4
+      else effect_to_remove = i
+      end
     elseif effect.type == 'ammo-damage' and effect.ammo_category == 'shotgun-shell' then
       effect.modifier = 0.6
     end
   end
-  table.remove(data.raw.technology[technology].effects, effect_to_remove)
+  if effect_to_remove ~= nil then table.remove(data.raw.technology[technology].effects, effect_to_remove) end
 end
 
 local technology_names = {
@@ -257,7 +275,7 @@ local technology_names = {
 for _,technology in pairs(technology_names) do
   for i,effect in pairs(data.raw.technology[technology].effects) do
     if effect.type == 'turret-attack' then
-      effect.modifier = 0.02
+      effect.modifier = 0.05
     end
   end
 end
