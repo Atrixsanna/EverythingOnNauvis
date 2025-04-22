@@ -230,6 +230,53 @@ data.raw.technology['electric-weapons-damage-2'].unit.count = 200
 data.raw.technology['electric-weapons-damage-3'].unit.count = 300
 data.raw.technology['electric-weapons-damage-4'].unit.count_formula = "500 * (L - 3)"
 
+
+-- change triggers for planetary science packs into research to stall them a little compared to walls
+table.insert(data.raw.technology['agricultural-science-pack'].prerequisites, "logistic-science-pack")
+data.raw.technology["agricultural-science-pack"].research_trigger = nil
+data.raw.technology['agricultural-science-pack'].unit = {
+  count = 50,
+  ingredients = {
+    {"automation-science-pack", 1},
+    {"logistic-science-pack", 1}
+  },
+  time = 10
+}
+table.insert(data.raw.technology['metallurgic-science-pack'].prerequisites, "chemical-science-pack")
+data.raw.technology["metallurgic-science-pack"].research_trigger = nil
+data.raw.technology['metallurgic-science-pack'].unit = {
+  count = 50,
+  ingredients = {
+    {"automation-science-pack", 1},
+    {"logistic-science-pack", 1},
+    {"chemical-science-pack", 1}
+  },
+  time = 30
+}
+table.insert(data.raw.technology['electromagnetic-science-pack'].prerequisites, "chemical-science-pack")
+data.raw.technology["electromagnetic-science-pack"].research_trigger = nil
+data.raw.technology['electromagnetic-science-pack'].unit = {
+  count = 50,
+  ingredients = {
+    {"automation-science-pack", 1},
+    {"logistic-science-pack", 1},
+    {"chemical-science-pack", 1}
+  },
+  time = 30
+}
+table.insert(data.raw.technology['cryogenic-science-pack'].prerequisites, "agricultural-science-pack")
+data.raw.technology["cryogenic-science-pack"].research_trigger = nil
+data.raw.technology['cryogenic-science-pack'].unit = {
+  count = 100,
+  ingredients = {
+    {"automation-science-pack", 1},
+    {"logistic-science-pack", 1},
+    {"agricultural-science-pack", 1}
+  },
+  time = 15
+}
+
+
 --set damage modifiers (previously Functions.combat_balance in scenario)
 local technology_names = {
   'physical-projectile-damage-1',
@@ -241,26 +288,24 @@ local technology_names = {
   'physical-projectile-damage-7'
 }
 for _,technology in pairs(technology_names) do
-  local effect_to_remove
+  --  local effect_to_remove
   for i,effect in pairs(data.raw.technology[technology].effects) do
     if effect.type == 'turret-attack' and effect.turret_id == 'gun-turret' then
-      if technology == 'physical-projectile-damage-1' then effect_to_remove = i
-      elseif technology == 'physical-projectile-damage-2' then effect_to_remove = i
-      elseif technology == 'physical-projectile-damage-3' then effect.modifier = 0.25
-      elseif technology == 'physical-projectile-damage-4' then effect.modifier = 0.25
+      if technology == 'physical-projectile-damage-1' then effect.modifier = 0.2
+      elseif technology == 'physical-projectile-damage-2' then effect.modifier = 0.3
       else effect.modifier = 0.5
       end
     elseif effect.type == 'ammo-damage' and effect.ammo_category == 'bullet' then
       if technology == 'physical-projectile-damage-1' then effect.modifier = 0.2
       elseif technology == 'physical-projectile-damage-2' then effect.modifier = 0.3
       elseif technology == 'physical-projectile-damage-3' then effect.modifier = 0.4
-      else effect_to_remove = i
+      else effect.modifier = 0.1
       end
     elseif effect.type == 'ammo-damage' and effect.ammo_category == 'shotgun-shell' then
       effect.modifier = 0.6
     end
   end
-  if effect_to_remove ~= nil then table.remove(data.raw.technology[technology].effects, effect_to_remove) end
+  --  if effect_to_remove ~= nil then table.remove(data.raw.technology[technology].effects, effect_to_remove) end
 end
 
 local technology_names = {
@@ -275,7 +320,13 @@ local technology_names = {
 for _,technology in pairs(technology_names) do
   for i,effect in pairs(data.raw.technology[technology].effects) do
     if effect.type == 'turret-attack' then
-      effect.modifier = 0.05
+      effect.modifier = 0.02
+    end
+    if effect.type == 'ammo-damage' then
+      if technology == 'refined-flammables-1' then effect.modifier = 0.2
+      elseif technology == 'refined-flammables-2' then effect.modifier = 0.3
+      else effect.modifier = 0.5
+      end
     end
   end
 end
@@ -335,3 +386,149 @@ for _,effect in pairs(data.raw.ammo['uranium-rounds-magazine'].ammo_type.action.
   if effect.type == 'damage' then effect.damage.amount = 48 end
 end
 data.raw.projectile['piercing-shotgun-pellet'].action.action_delivery.target_effects.damage.amount = 12
+
+--change quality modules
+data.raw.module['speed-module'].effect = { speed = 0.2, consumption = 0.5, quality = -0.5 }
+data.raw.module['speed-module-2'].effect = { speed = 0.3, consumption = 0.6, quality = -1.5 }
+data.raw.module['speed-module-3'].effect = { speed = 0.5, consumption = 0.7, quality = -2.5 }
+data.raw.module['quality-module'].effect = { quality = 0.4, speed = -0.05 }
+data.raw.module['quality-module-2'].effect = { quality = 0.6, speed = -0.1 }
+data.raw.module['quality-module-3'].effect = { quality = 1, speed = -0.2 }
+
+
+
+
+data:extend({
+    {
+		type = "item",
+        name = "concrete-wall",
+		place_result = "concrete-wall",
+		icon = "__space-age-biter-battles__/graphics/icons/concrete-wall.png",
+		icon_size = 64,
+		icon_mipmaps = 4,
+		subgroup = "defensive-structure",
+		order = "a[stone-wall]-b[concrete]",
+		stack_size = 100,
+	}
+})
+
+data:extend({
+	{
+		type = "recipe",
+		name = "concrete-wall",
+		enabled = false,
+		energy_required = 0.5,
+		ingredients = {
+		    {type = "item", name = "concrete", amount = 20}
+		},
+		results = { { type = "item", name = "concrete-wall", amount_min = 1, amount_max = 1 } }
+	}
+})
+
+local stronger_wall = util.table.deepcopy(data.raw.wall["stone-wall"])
+    stronger_wall.name = "concrete-wall"
+    stronger_wall.icon = "__space-age-biter-battles__/graphics/icons/concrete-wall.png"
+    stronger_wall.minable.result = "concrete-wall"
+    stronger_wall.max_health = 550
+    stronger_wall.resistances = {
+      {
+        type = "physical",
+        decrease = 7,
+        percent = 40
+      },
+      {
+        type = "impact",
+        decrease = 90,
+        percent = 80
+      },
+      {
+        type = "explosion",
+        percent = 100
+      },
+      {
+        type = "fire",
+        percent = 100
+      },
+      {
+        type = "acid",
+		decrease = 0,
+        percent = 90
+      },
+      {
+        type = "laser",
+        percent = 80
+      }
+    }
+    stronger_wall.pictures.single.layers[1].filename = "__space-age-biter-battles__/graphics/concrete-wall/wall-single.png"
+    stronger_wall.pictures.single.layers[1].width = 32
+    stronger_wall.pictures.single.layers[1].height = 46
+    stronger_wall.pictures.single.layers[1].scale = 1
+    stronger_wall.pictures.single.layers[1].shift = {0, -6 / 32}
+    stronger_wall.pictures.straight_vertical.layers[1].filename = "__space-age-biter-battles__/graphics/concrete-wall/wall-vertical.png"
+    stronger_wall.pictures.straight_vertical.layers[1].width = 32
+    stronger_wall.pictures.straight_vertical.layers[1].height = 68
+    stronger_wall.pictures.straight_vertical.layers[1].scale = 1
+    stronger_wall.pictures.straight_vertical.layers[1].shift = {0, 9 / 32}
+    stronger_wall.pictures.straight_horizontal.layers[1].filename = "__space-age-biter-battles__/graphics/concrete-wall/wall-horizontal.png"
+    stronger_wall.pictures.straight_horizontal.layers[1].width = 32
+    stronger_wall.pictures.straight_horizontal.layers[1].height = 50
+    stronger_wall.pictures.straight_horizontal.layers[1].scale = 1
+    stronger_wall.pictures.straight_horizontal.layers[1].shift = {0, -4 / 32}
+    stronger_wall.pictures.corner_right_down.layers[1].filename = "__space-age-biter-battles__/graphics/concrete-wall/wall-corner-right.png"
+    stronger_wall.pictures.corner_right_down.layers[1].width = 32
+    stronger_wall.pictures.corner_right_down.layers[1].height = 64
+    stronger_wall.pictures.corner_right_down.layers[1].scale = 1
+    stronger_wall.pictures.corner_right_down.layers[1].shift = {0, 6 / 32}
+    stronger_wall.pictures.corner_left_down.layers[1].filename = "__space-age-biter-battles__/graphics/concrete-wall/wall-corner-left.png"
+    stronger_wall.pictures.corner_left_down.layers[1].width = 32
+    stronger_wall.pictures.corner_left_down.layers[1].height = 68
+    stronger_wall.pictures.corner_left_down.layers[1].scale = 1
+    stronger_wall.pictures.corner_left_down.layers[1].shift = {0, 6 / 32}
+    stronger_wall.pictures.t_up.layers[1].filename = "__space-age-biter-battles__/graphics/concrete-wall/wall-t.png"
+    stronger_wall.pictures.t_up.layers[1].width = 32
+    stronger_wall.pictures.t_up.layers[1].height = 64
+    stronger_wall.pictures.t_up.layers[1].scale = 1
+    stronger_wall.pictures.t_up.layers[1].shift = {0, 4 / 32}
+    stronger_wall.pictures.ending_right.layers[1].filename = "__space-age-biter-battles__/graphics/concrete-wall/wall-ending-right.png"
+    stronger_wall.pictures.ending_right.layers[1].width = 32
+    stronger_wall.pictures.ending_right.layers[1].height = 48
+    stronger_wall.pictures.ending_right.layers[1].scale = 1
+    stronger_wall.pictures.ending_right.layers[1].shift = {0, -4 / 32}
+    stronger_wall.pictures.ending_left.layers[1].filename = "__space-age-biter-battles__/graphics/concrete-wall/wall-ending-left.png"
+    stronger_wall.pictures.ending_left.layers[1].width = 32
+    stronger_wall.pictures.ending_left.layers[1].height = 48
+    stronger_wall.pictures.ending_left.layers[1].scale = 1
+    stronger_wall.pictures.ending_left.layers[1].shift = {0, -4 / 32}
+    stronger_wall.pictures.water_connection_patch.sheets[1].filename = "__space-age-biter-battles__/graphics/concrete-wall/wall-patch.png"
+    stronger_wall.pictures.water_connection_patch.sheets[1].width = 58
+    stronger_wall.pictures.water_connection_patch.sheets[1].height = 64
+    stronger_wall.pictures.water_connection_patch.sheets[1].scale = 1
+    stronger_wall.pictures.water_connection_patch.sheets[1].shift = {0, -2 / 32}
+    stronger_wall.pictures.filling.filename = "__space-age-biter-battles__/graphics/concrete-wall/wall-filling.png"
+    stronger_wall.pictures.filling.width = 24
+    stronger_wall.pictures.filling.height = 28
+    stronger_wall.pictures.filling.scale = 1
+    stronger_wall.pictures.filling.shift = {0, -3 / 32}
+
+data:extend({stronger_wall})
+
+local tech_stronger_wall = util.table.deepcopy(data.raw["technology"]["stone-wall"])
+tech_stronger_wall.name = "concrete-wall"
+tech_stronger_wall.icon = "__space-age-biter-battles__/graphics/technology/concrete-wall.png"
+tech_stronger_wall.effects = {{type = "unlock-recipe", recipe = "concrete-wall"}}
+tech_stronger_wall.prerequisites = {"stone-wall", "concrete","metallurgic-science-pack"}
+tech_stronger_wall.unit = {
+    count = 50, 
+    time = 15, 
+    ingredients = {
+        {"automation-science-pack", 1}, 
+        {"logistic-science-pack", 1},
+        {"chemical-science-pack", 1},
+        {"metallurgic-science-pack", 1}
+    }
+}
+tech_stronger_wall.order = "a-k-a-b"
+
+data:extend({tech_stronger_wall})
+
+data.raw["wall"]['stone-wall'].next_upgrade = "concrete-wall"
